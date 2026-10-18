@@ -8,6 +8,8 @@ This document is intentionally detailed for:
 - software engineering documentation,
 - implementation and testing traceability.
 
+> **Run it on your computer:** follow **[SETUP.md](SETUP.md)** (one command on Windows: `powershell -ExecutionPolicy Bypass -File .\setup.ps1`).
+
 > Clinical disclaimer: The platform provides educational AI-assisted support and does not replace licensed medical diagnosis.
 
 ## Latest update highlights (May 2026)
@@ -908,59 +910,19 @@ backend/tests/
 
 ## 18. Deployment and Portability Commands
 
-## 18.1 Run on Current Machine (Windows, PowerShell)
-
-Backend terminal:
+The complete, tested setup guide for a new computer is **[SETUP.md](SETUP.md)**. In short (Windows):
 
 ```powershell
-cd e:\DermaSoul-AI\backend
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-copy .env.example .env
-# edit .env (DATABASE_URL, JWT_SECRET_KEY, model paths, etc.)
-python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8010
-```
-
-Frontend terminal:
-
-```powershell
-cd e:\DermaSoul-AI\frontend
-npm install
-copy .env.example .env.development.local
-npm run dev
-```
-
-## 18.2 Run on Different Computer
-
-Prerequisites:
-- Git
-- Python 3.11+
-- Node.js 20+
-- PostgreSQL
-
-```powershell
-git clone <your-repo-url> DermaSoul-AI
+git clone https://github.com/arwadsabahat1/DermaSoul-AI.git
 cd DermaSoul-AI
+powershell -ExecutionPolicy Bypass -File .\setup.ps1     # one-time setup
+powershell -ExecutionPolicy Bypass -File .\start.ps1     # start backend + frontend
 ```
 
-Then repeat backend/frontend setup exactly as above.
-
-## 18.3 Run Locally from Different Path
-
-Example:
-
-```powershell
-cd D:\projects
-git clone <your-repo-url> DermaSoul-AI
-cd DermaSoul-AI
-```
-
-Recreate `.venv`, reinstall backend dependencies, run `npm install` in `frontend`, recreate env files.
-
-Why:
-- virtual environments and compiled dependencies are path/environment sensitive.
+Prerequisites: Git, **Python 3.12**, **Node.js 22 LTS (22.12+)**, **PostgreSQL 16+**. `setup.ps1` creates `backend\venv`,
+installs packages, writes `backend\.env`, downloads the two language models
+(`python -m app.scripts.download_models`) and prepares the database (`python -m app.scripts.setup_database`).
+See SETUP.md for the manual steps on Windows, macOS and Linux, and for troubleshooting.
 
 ---
 
