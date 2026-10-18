@@ -1,0 +1,1226 @@
+{
+ "summary": {
+  "run_at": "2026-10-18T16:50:37",
+  "total": 146,
+  "passed": 146,
+  "failed": 0,
+  "database": "rolled back",
+  "uploads_removed": 0
+ },
+ "sections": {
+  "UT1": [
+   {
+    "no": 1,
+    "test_case": "Run EmailStr validation with valid email",
+    "attribute": "\"user@example.com\"",
+    "expected": "True",
+    "actual": "True",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Run EmailStr validation with invalid email",
+    "attribute": "\"userexample.com\"",
+    "expected": "False",
+    "actual": "False",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Run EmailStr validation with empty string",
+    "attribute": "\"\"",
+    "expected": "False",
+    "actual": "False",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Run EmailStr validation with subdomain email",
+    "attribute": "\"user@mail.company.co.uk\"",
+    "expected": "True",
+    "actual": "True",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Run EmailStr validation with email containing space",
+    "attribute": "\"user@exam ple.com\"",
+    "expected": "False",
+    "actual": "False",
+    "result": "Pass"
+   }
+  ],
+  "UT2": [
+   {
+    "no": 1,
+    "test_case": "Hash valid password",
+    "attribute": "\"SecurePass123!\"",
+    "expected": "Non-empty bcrypt hash",
+    "actual": "$2b$12$\u2026 (60 chars)",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Verify correct password",
+    "attribute": "\"SecurePass123!\"",
+    "expected": "True",
+    "actual": "True",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Verify incorrect password",
+    "attribute": "\"WrongPass123\"",
+    "expected": "False",
+    "actual": "False",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Verify empty password",
+    "attribute": "\"\"",
+    "expected": "False",
+    "actual": "False",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Hash same password twice",
+    "attribute": "\"SecurePass123!\"",
+    "expected": "Different hashes (salt)",
+    "actual": "different hashes",
+    "result": "Pass"
+   }
+  ],
+  "UT3": [
+   {
+    "no": 1,
+    "test_case": "Generate JWT token",
+    "attribute": "User ID",
+    "expected": "Token generated",
+    "actual": "eyJhbGciOiJIUzI1\u2026",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Check JWT structure",
+    "attribute": "Generated token",
+    "expected": "Header, payload and signature",
+    "actual": "3 parts",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Verify valid token",
+    "attribute": "Valid token",
+    "expected": "Payload returned (user ID)",
+    "actual": "user-123",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Verify tampered token",
+    "attribute": "Tampered token",
+    "expected": "Rejected",
+    "actual": "rejected",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Verify expired token",
+    "attribute": "Expired token",
+    "expected": "Rejected",
+    "actual": "rejected",
+    "result": "Pass"
+   }
+  ],
+  "UT4": [
+   {
+    "no": 1,
+    "test_case": "Validate a sharp skin photo",
+    "attribute": "Eczema test image",
+    "expected": "Passes the blur check",
+    "actual": "Passed (blur score 553.4)",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Validate a blurred photo",
+    "attribute": "Gaussian blur radius 3",
+    "expected": "Rejected as blurry",
+    "actual": "Image appears blurry. Blur score: 4.41. Please upload a clearer photo of the affected skin area.",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Validate a high-resolution photo",
+    "attribute": "Resized to 3000 px",
+    "expected": "Passes (size-independent)",
+    "actual": "Passed (blur score 521.9)",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Validate a non-skin screenshot",
+    "attribute": "Synthetic 800x600 UI image",
+    "expected": "Rejected, no visible skin",
+    "actual": "No visible skin area detected. Please upload a clear photo of the affected skin area.",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Validate an unsupported format",
+    "attribute": "GIF image",
+    "expected": "Rejected",
+    "actual": "Only JPG, JPEG, and PNG images are allowed.",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "Validate a low-resolution image",
+    "attribute": "100x100 JPG",
+    "expected": "Rejected",
+    "actual": "Image resolution is too low. Uploaded image size is 100x100. Please upload an image of at least 128x128 pixels.",
+    "result": "Pass"
+   },
+   {
+    "no": 7,
+    "test_case": "Validate a corrupted file",
+    "attribute": "Non-image bytes named .jpg",
+    "expected": "Rejected",
+    "actual": "Invalid or corrupted image file.",
+    "result": "Pass"
+   }
+  ],
+  "UT5": [
+   {
+    "no": 1,
+    "test_case": "Extract symptoms, negation and duration",
+    "attribute": "itchy, red, burning rash, 2 weeks, no pain",
+    "expected": "itching, redness, burning, rash; pain negated; 2 weeks",
+    "actual": "itching, redness, burning, rash; negated ['pain']; 2 weeks",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Handle negated warning terms",
+    "attribute": "Itchy red rash but no fever and no pus",
+    "expected": "fever and pus negated",
+    "actual": "negated ['fever', 'pus']; extracted ['itching', 'redness', 'rash']",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Recognise Roman-Urdu terms",
+    "attribute": "khujli aur jalan on my arm",
+    "expected": "itching, burning",
+    "actual": "['itching', 'burning']",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Extract descriptive symptoms",
+    "attribute": "bumps, scaly patches, 3 months",
+    "expected": "bumps, scaling, patches; 3 months",
+    "actual": "['bumps', 'scaling', 'patches']; 3 months",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Fallback when the NER model is unavailable",
+    "attribute": "itchy rash on my arm (model disabled)",
+    "expected": "Rule-based extraction still works",
+    "actual": "['itching', 'rash']; version rule-fallback-v2",
+    "result": "Pass"
+   }
+  ],
+  "UT6": [
+   {
+    "no": 1,
+    "test_case": "Detect red flags in text",
+    "attribute": "rash is rapidly spreading with fever",
+    "expected": "Fever and rapid-spreading flags",
+    "actual": "['fever_with_skin_issue', 'rapidly_spreading']",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Red flag overrides the model",
+    "attribute": "Acne, 0.99, flags ['rapidly_spreading'], severity mild",
+    "expected": "High",
+    "actual": "High",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "High-risk condition",
+    "attribute": "Skin Cancer, 0.99, flags none, severity mild",
+    "expected": "High",
+    "actual": "High",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Severe symptoms",
+    "attribute": "Acne, 0.9, flags none, severity severe",
+    "expected": "High",
+    "actual": "High",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Moderate-risk condition",
+    "attribute": "Eczema, 0.5, flags none, severity mild",
+    "expected": "Moderate",
+    "actual": "Moderate",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "Low model confidence",
+    "attribute": "Acne, 0.3, flags none, severity mild",
+    "expected": "Uncertain",
+    "actual": "Uncertain",
+    "result": "Pass"
+   },
+   {
+    "no": 7,
+    "test_case": "Confident mild case",
+    "attribute": "Acne, 0.9, flags none, severity mild",
+    "expected": "Low to Moderate",
+    "actual": "Low to Moderate",
+    "result": "Pass"
+   },
+   {
+    "no": 8,
+    "test_case": "Denied warning signs are ignored",
+    "attribute": "Itchy red rash but no fever and no pus",
+    "expected": "No red flags",
+    "actual": "no red flags",
+    "result": "Pass"
+   },
+   {
+    "no": 9,
+    "test_case": "Warning sign after 'but' is still flagged",
+    "attribute": "No itching, but fever since yesterday",
+    "expected": "fever_with_skin_issue",
+    "actual": "['fever_with_skin_issue']",
+    "result": "Pass"
+   },
+   {
+    "no": 10,
+    "test_case": "Denied breathing problem is ignored",
+    "attribute": "Patient denies difficulty breathing",
+    "expected": "No red flags",
+    "actual": "no red flags",
+    "result": "Pass"
+   }
+  ],
+  "UT7": [
+   {
+    "no": 1,
+    "test_case": "Confident prediction with matching symptoms",
+    "attribute": "Eczema, 0.90, itching and redness",
+    "expected": "Only Eczema sources, no related conditions",
+    "actual": "sources ['Eczema']",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Low-confidence prediction",
+    "attribute": "Tinea, 0.30, itching, dryness, scaling",
+    "expected": "Related conditions added",
+    "actual": "sources ['Eczema', 'Infestations/Bites', 'Tinea']",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Warning signs of a changing mole",
+    "attribute": "Tinea, 0.35, bleeding and changing mole",
+    "expected": "Skin Cancer shown as a related condition",
+    "actual": "sources ['Skin Cancer', 'Tinea', 'Vascular Tumors']",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Retrieval trace",
+    "attribute": "Eczema, 0.90, itching",
+    "expected": "Condition chunks only, confidence between 0 and 1",
+    "actual": "5 chunks ['condition_knowledge']; retrieval confidence 0.6709",
+    "result": "Pass"
+   }
+  ],
+  "UT8": [
+   {
+    "no": 1,
+    "test_case": "Predict skin type for three test images",
+    "attribute": "Eczema, Acne, Psoriasis images",
+    "expected": "One of dry, normal or oily for each image",
+    "actual": "dry, dry, dry",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Confidence score and band",
+    "attribute": "Same three predictions",
+    "expected": "Confidence between 0 and 1 with a matching band",
+    "actual": "0.63 (medium), 0.41 (low), 0.61 (medium)",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Repeat prediction on the same image",
+    "attribute": "Eczema image twice",
+    "expected": "Identical result",
+    "actual": "dry 0.6257",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Image with a different size and shape",
+    "attribute": "Eczema image resized to 1600x500",
+    "expected": "Valid prediction (resized to 240x240)",
+    "actual": "dry (0.62)",
+    "result": "Pass"
+   }
+  ],
+  "UT9": [
+   {
+    "no": 1,
+    "test_case": "Remove an unsafe treatment claim",
+    "attribute": "\"This cream is a guaranteed cure for your rash.\"",
+    "expected": "Replaced with a safe educational statement",
+    "actual": "This assessment is educational support and not a definitive diagnosis. Please seek license",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Detect advice to skip a doctor",
+    "attribute": "\"There is no need to see a doctor.\"",
+    "expected": "Flagged as unsafe",
+    "actual": "True",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Keep safe guidance unchanged",
+    "attribute": "\"Keep the area clean and moisturise regularly.\"",
+    "expected": "Text unchanged",
+    "actual": "Keep the area clean and moisturise regularly.",
+    "result": "Pass"
+   }
+  ],
+  "FT1": [
+   {
+    "no": 1,
+    "test_case": "Register with valid credentials",
+    "attribute": "Email: report-new@example.com, Password: SecurePass123!",
+    "expected": "Account is created",
+    "actual": "200; role user",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Register with duplicate email",
+    "attribute": "Email already exists",
+    "expected": "Error message is displayed",
+    "actual": "400 An account with this email already exists.",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Register with invalid email",
+    "attribute": "Email: invalid.email",
+    "expected": "Registration is rejected",
+    "actual": "422 validation error",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Register with weak password",
+    "attribute": "Password: 123",
+    "expected": "Registration is rejected",
+    "actual": "422 validation error",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Register with empty fields",
+    "attribute": "Email: \"\", Password: \"\"",
+    "expected": "Required field error",
+    "actual": "422 validation error",
+    "result": "Pass"
+   }
+  ],
+  "FT2": [
+   {
+    "no": 1,
+    "test_case": "Login as regular user",
+    "attribute": "report-user@example.com",
+    "expected": "Logged in as user; Admin menu hidden",
+    "actual": "200; role user",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Login as admin",
+    "attribute": "report-admin@example.com",
+    "expected": "Logged in as admin; Admin menu available",
+    "actual": "200; role admin",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Login with wrong password",
+    "attribute": "Valid email, wrong password",
+    "expected": "Invalid credentials error",
+    "actual": "401 Invalid email or password.",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Login with non-existing email",
+    "attribute": "ghost@example.com",
+    "expected": "Invalid credentials error",
+    "actual": "401 Invalid email or password.",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Token returned for future requests",
+    "attribute": "Valid credentials",
+    "expected": "JWT token returned and accepted",
+    "actual": "token with 3 parts accepted",
+    "result": "Pass"
+   }
+  ],
+  "FT3": [
+   {
+    "no": 1,
+    "test_case": "Get profile",
+    "attribute": "Authenticated user token",
+    "expected": "User profile is returned",
+    "actual": "200",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Update full name",
+    "attribute": "Full Name: Updated Name",
+    "expected": "Full name is updated",
+    "actual": "Updated Name",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Update age",
+    "attribute": "Age: 28",
+    "expected": "Age field is updated",
+    "actual": "28",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Update allergies",
+    "attribute": "Known Allergies: Penicillin",
+    "expected": "Allergies are saved",
+    "actual": "Penicillin",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Access profile without token",
+    "attribute": "No JWT token",
+    "expected": "Access denied",
+    "actual": "401",
+    "result": "Pass"
+   }
+  ],
+  "FT4": [
+   {
+    "no": 1,
+    "test_case": "Analyze a valid image",
+    "attribute": "Eczema image + \"Itchy dry red patches on my arm for 3 weeks\"",
+    "expected": "200 with the full assessment",
+    "actual": "200; Eczema (96.9%), risk Moderate, 67 response fields",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Request without an image",
+    "attribute": "Symptoms only",
+    "expected": "Request rejected",
+    "actual": "422 validation error",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Symptoms too short",
+    "attribute": "Symptoms: \"hi\"",
+    "expected": "Validation error",
+    "actual": "400 Please describe your symptoms in at least 5 characters.",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Non-image file",
+    "attribute": "Plain-text file",
+    "expected": "Rejected",
+    "actual": "400 Only JPG, JPEG, and PNG images are allowed.",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Blurry image",
+    "attribute": "Blurred test image",
+    "expected": "Rejected",
+    "actual": "400 Image appears blurry. Blur score: 6.11. Please upload a clearer photo of the affected skin area.",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "Screenshot",
+    "attribute": "Synthetic UI image",
+    "expected": "Rejected",
+    "actual": "400 No visible skin area detected. Please upload a clear photo of the affected skin area.",
+    "result": "Pass"
+   },
+   {
+    "no": 7,
+    "test_case": "Request without a token",
+    "attribute": "Valid request, no JWT",
+    "expected": "Access denied",
+    "actual": "401",
+    "result": "Pass"
+   }
+  ],
+  "FT5": [
+   {
+    "no": 1,
+    "test_case": "Low-risk acne",
+    "attribute": "Acne, oily skin, Low to Moderate",
+    "expected": "Up to 4 suitable products",
+    "actual": "preventive-skincare, supportive-skincare, supportive-skincare, preventive-skincare",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "High-risk case",
+    "attribute": "Acne, oily skin, High",
+    "expected": "No active or pharmacist-guided products",
+    "actual": "gentle cleanser [supportive_skincare]; broad_spectrum sunscreen [preventive_skincare]; preventive_skincare [preventive_skincare]; supportive_skincare [supportive_skincare]",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Red flag present",
+    "attribute": "Acne, pus_or_infection flag",
+    "expected": "OTC actives and pharmacist-guided products removed",
+    "actual": "preventive_skincare [preventive_skincare]; supportive_skincare [supportive_skincare]; supportive_skincare [supportive_skincare]; preventive_skincare [preventive_skincare]",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Known allergy",
+    "attribute": "Eczema, allergy: fragrance",
+    "expected": "Products flagged for that allergy removed",
+    "actual": "allergy filter applied=True; conflicting items none",
+    "result": "Pass"
+   }
+  ],
+  "FT6": [
+   {
+    "no": 1,
+    "test_case": "List articles without logging in",
+    "attribute": "GET /api/education",
+    "expected": "Public list of articles",
+    "actual": "200; 5 articles",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Search articles",
+    "attribute": "search = \"eczema\"",
+    "expected": "Eczema article returned",
+    "actual": "['eczema']",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Open an article",
+    "attribute": "slug = eczema",
+    "expected": "Full article content returned",
+    "actual": "200; Eczema: Flare Management and Skin Barrier Care",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Open a missing article",
+    "attribute": "slug = no-such-article",
+    "expected": "Not found",
+    "actual": "404",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Related articles",
+    "attribute": "slug = eczema (temporary article added in the same category)",
+    "expected": "Same-category article listed, the article itself excluded",
+    "actual": "200; ['report-test-eczema-care']",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "Article suggested after an analysis",
+    "attribute": "Eczema analysis from Functional Testing 4",
+    "expected": "Link to the Eczema article",
+    "actual": "eczema",
+    "result": "Pass"
+   }
+  ],
+  "FT7": [
+   {
+    "no": 1,
+    "test_case": "Admin adds a dermatologist",
+    "attribute": "Dr Report Test",
+    "expected": "Created (201)",
+    "actual": "201",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Add without a name",
+    "attribute": "Missing full_name",
+    "expected": "Validation error",
+    "actual": "422",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "User browses the directory",
+    "attribute": "User token",
+    "expected": "New active dermatologist listed",
+    "actual": "2 listed",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Referral for a high-risk case",
+    "attribute": "High risk, Skin Cancer",
+    "expected": "Matching dermatologist referred",
+    "actual": "['Dr Report Test (12 years experience, specialty match)', 'abdul munim (5 years experience)']",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "No referral for a low-risk case",
+    "attribute": "Low to Moderate, Acne",
+    "expected": "No referral",
+    "actual": "none",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "Disabled entry hidden from users",
+    "attribute": "Admin disables Dr Report Test",
+    "expected": "Hidden from users (even with include_inactive), visible to admin",
+    "actual": "user sees it: False; admin sees it: True",
+    "result": "Pass"
+   },
+   {
+    "no": 7,
+    "test_case": "Disabled entry not referred",
+    "attribute": "High risk, Skin Cancer",
+    "expected": "Not referred",
+    "actual": "not referred",
+    "result": "Pass"
+   },
+   {
+    "no": 8,
+    "test_case": "Admin deletes the entry",
+    "attribute": "Dr Report Test",
+    "expected": "Entry removed",
+    "actual": "200",
+    "result": "Pass"
+   }
+  ],
+  "FT8": [
+   {
+    "no": 1,
+    "test_case": "Change password with wrong current password",
+    "attribute": "Current: Wrong123!",
+    "expected": "Rejected",
+    "actual": "401 Current password is incorrect.",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Change to a too-short password",
+    "attribute": "New: short",
+    "expected": "Validation error",
+    "actual": "422",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Change password correctly",
+    "attribute": "New: NewPass456!",
+    "expected": "Old password rejected, new password works",
+    "actual": "200; old login 401, new login 200",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Delete account with wrong password",
+    "attribute": "Password: Wrong123!",
+    "expected": "Rejected",
+    "actual": "401 Password is incorrect.",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Delete account correctly",
+    "attribute": "Correct password",
+    "expected": "Account, consultations and images removed",
+    "actual": "200; login afterwards 401; image file removed: True",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "Disabled user with an existing token",
+    "attribute": "Token issued before the account was disabled",
+    "expected": "Access denied",
+    "actual": "before 200, after 403 This account is disabled.",
+    "result": "Pass"
+   },
+   {
+    "no": 7,
+    "test_case": "Expired token",
+    "attribute": "Token past its 60-minute lifetime",
+    "expected": "Access denied",
+    "actual": "401 Invalid or expired authentication token.",
+    "result": "Pass"
+   }
+  ],
+  "BR": [
+   {
+    "no": 1,
+    "test_case": "User is authenticated as normal user",
+    "attribute": "GET /api/profile/me",
+    "expected": "Access allowed",
+    "actual": "200 OK",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "User is authenticated as normal user",
+    "attribute": "GET /api/admin/users",
+    "expected": "Access denied",
+    "actual": "403 Admin access required.",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "User is authenticated as admin",
+    "attribute": "GET /api/admin/users",
+    "expected": "Access allowed",
+    "actual": "200 OK",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "User is authenticated as admin",
+    "attribute": "GET /api/profile/me",
+    "expected": "Access allowed",
+    "actual": "200 OK",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "User is not authenticated",
+    "attribute": "GET /api/profile/me",
+    "expected": "Access denied",
+    "actual": "401 Not authenticated",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "User sends invalid token",
+    "attribute": "GET /api/profile/me",
+    "expected": "Access denied",
+    "actual": "401 Invalid or expired authentication token.",
+    "result": "Pass"
+   },
+   {
+    "no": 7,
+    "test_case": "User is authenticated as normal user",
+    "attribute": "POST /api/admin/ai/reindex-rag",
+    "expected": "Access denied",
+    "actual": "403 Admin access required.",
+    "result": "Pass"
+   },
+   {
+    "no": 8,
+    "test_case": "User is authenticated as admin",
+    "attribute": "GET /api/admin/ai/model-registry",
+    "expected": "Access allowed",
+    "actual": "200 OK",
+    "result": "Pass"
+   },
+   {
+    "no": 9,
+    "test_case": "User is authenticated as normal user",
+    "attribute": "GET /api/admin/consultations/flagged",
+    "expected": "Access denied",
+    "actual": "403 Admin access required.",
+    "result": "Pass"
+   },
+   {
+    "no": 10,
+    "test_case": "User is authenticated as normal user",
+    "attribute": "POST /api/dermatologists",
+    "expected": "Access denied",
+    "actual": "403 Admin access required.",
+    "result": "Pass"
+   },
+   {
+    "no": 11,
+    "test_case": "User is authenticated as admin",
+    "attribute": "PATCH /api/admin/users/33331234-c8e0-444b-a158-1b013be2c91e/status",
+    "expected": "Admin cannot disable own account",
+    "actual": "400 You cannot disable your own admin account.",
+    "result": "Pass"
+   }
+  ],
+  "IT1": [
+   {
+    "no": 1,
+    "test_case": "Register user",
+    "attribute": "Valid email and password",
+    "expected": "User account is created",
+    "actual": "200",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Login with same credentials",
+    "attribute": "Registered email and password",
+    "expected": "JWT token is returned",
+    "actual": "200",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Verify JWT format",
+    "attribute": "Returned token",
+    "expected": "Valid JWT format",
+    "actual": "3 parts",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Access protected profile route",
+    "attribute": "Authorization Bearer token",
+    "expected": "Profile data is returned",
+    "actual": "200",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Update profile",
+    "attribute": "Age and allergies",
+    "expected": "Values saved",
+    "actual": "200",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "Retrieve updated profile",
+    "attribute": "Same token",
+    "expected": "Updated values returned",
+    "actual": "age 31, allergies Fragrance",
+    "result": "Pass"
+   }
+  ],
+  "IT2": [
+   {
+    "no": 1,
+    "test_case": "Admin login",
+    "attribute": "Admin email and password",
+    "expected": "Admin token is generated",
+    "actual": "200",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "List all users",
+    "attribute": "Admin JWT token",
+    "expected": "List of users is returned",
+    "actual": "200; 24 users",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "View a user's consultations",
+    "attribute": "Selected user ID",
+    "expected": "User's consultation list is returned",
+    "actual": "200; 1 consultations",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Deactivate user",
+    "attribute": "User ID",
+    "expected": "is_active becomes False",
+    "actual": "False",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Login as deactivated user",
+    "attribute": "Deactivated user credentials",
+    "expected": "Login is denied",
+    "actual": "403 This account is disabled.",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "Reactivate user",
+    "attribute": "User ID",
+    "expected": "is_active becomes True",
+    "actual": "True",
+    "result": "Pass"
+   },
+   {
+    "no": 7,
+    "test_case": "Login as reactivated user",
+    "attribute": "Reactivated user credentials",
+    "expected": "Login succeeds",
+    "actual": "200",
+    "result": "Pass"
+   }
+  ],
+  "IT3": [
+   {
+    "no": 1,
+    "test_case": "Run a skin analysis",
+    "attribute": "Valid image and symptoms",
+    "expected": "Consultation saved and returned",
+    "actual": "consultation 9bf5ed91\u2026",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "View consultation history",
+    "attribute": "Same user token",
+    "expected": "New consultation listed",
+    "actual": "200; 1 listed",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Open consultation detail",
+    "attribute": "Consultation ID",
+    "expected": "Full assessment returned",
+    "actual": "200; Eczema with RAG assessment",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Download PDF report",
+    "attribute": "Consultation ID",
+    "expected": "PDF file returned",
+    "actual": "200, application/pdf, 7166 bytes",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Retrieve uploaded image",
+    "attribute": "Consultation ID",
+    "expected": "Image returned",
+    "actual": "200, image/jpeg",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "Access by another user",
+    "attribute": "Other user's token",
+    "expected": "Access denied",
+    "actual": "404",
+    "result": "Pass"
+   },
+   {
+    "no": 7,
+    "test_case": "Admin views the consultation",
+    "attribute": "Admin token",
+    "expected": "Details returned",
+    "actual": "200",
+    "result": "Pass"
+   },
+   {
+    "no": 8,
+    "test_case": "Delete the consultation",
+    "attribute": "Owner token",
+    "expected": "Consultation deleted",
+    "actual": "200",
+    "result": "Pass"
+   },
+   {
+    "no": 9,
+    "test_case": "Open after deletion",
+    "attribute": "Same consultation ID",
+    "expected": "Not found",
+    "actual": "404",
+    "result": "Pass"
+   }
+  ],
+  "IT4": [
+   {
+    "no": 1,
+    "test_case": "Admin adds a product",
+    "attribute": "Report Test Cleanser",
+    "expected": "Created (201)",
+    "actual": "201",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "User tries to add a product",
+    "attribute": "User token",
+    "expected": "Access denied",
+    "actual": "403",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "Admin updates the product",
+    "attribute": "price_range = PKR 500-800",
+    "expected": "Product updated",
+    "actual": "PKR 500-800",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "Admin deletes the product",
+    "attribute": "Product ID",
+    "expected": "Product removed",
+    "actual": "200; afterwards 404",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "Admin publishes an article",
+    "attribute": "Report Test Article",
+    "expected": "Created with a URL slug",
+    "actual": "201; slug report-test-article",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "Admin edits the article",
+    "attribute": "summary = Updated summary",
+    "expected": "Article updated",
+    "actual": "Updated summary",
+    "result": "Pass"
+   },
+   {
+    "no": 7,
+    "test_case": "Admin deletes the article",
+    "attribute": "slug report-test-article",
+    "expected": "Article removed",
+    "actual": "200; afterwards 404",
+    "result": "Pass"
+   },
+   {
+    "no": 8,
+    "test_case": "High-risk case appears in flagged list",
+    "attribute": "Analysis with fever and pus",
+    "expected": "Listed as flagged (High risk)",
+    "actual": "200; listed: True; all High: True",
+    "result": "Pass"
+   },
+   {
+    "no": 9,
+    "test_case": "Dashboard statistics",
+    "attribute": "Admin token",
+    "expected": "Counts consistent with the database",
+    "actual": "users 24 (21 active), consultations 43, high risk 16",
+    "result": "Pass"
+   }
+  ],
+  "NFT": [
+   {
+    "no": 1,
+    "test_case": "PER-2: Analysis response time",
+    "attribute": "3 full analyses of a valid image",
+    "expected": "Under 20 seconds each",
+    "actual": "average 1.06 s, slowest 1.29 s",
+    "result": "Pass"
+   },
+   {
+    "no": 2,
+    "test_case": "Server stays responsive during an analysis",
+    "attribute": "Health check sent while an analysis runs",
+    "expected": "Answered without waiting for the analysis",
+    "actual": "health check 8 ms while analysis took 1215 ms",
+    "result": "Pass"
+   },
+   {
+    "no": 3,
+    "test_case": "REL-2: Invalid images stopped before the AI model",
+    "attribute": "Text, corrupted, blurry and screenshot uploads",
+    "expected": "AI model never runs",
+    "actual": "model ran 0 times for 4 invalid uploads",
+    "result": "Pass"
+   },
+   {
+    "no": 4,
+    "test_case": "REL-3: Unexpected server error",
+    "attribute": "Deliberate internal failure",
+    "expected": "Clear error message, no endless loading",
+    "actual": "500 \"An unexpected server error occurred. Please try again.\" in 3 ms",
+    "result": "Pass"
+   },
+   {
+    "no": 5,
+    "test_case": "SEC-2: Password storage",
+    "attribute": "Stored password of a test user",
+    "expected": "bcrypt hash, never plain text",
+    "actual": "$2b$12$\u2026 (60 chars)",
+    "result": "Pass"
+   },
+   {
+    "no": 6,
+    "test_case": "SEC-4: Disguised file upload",
+    "attribute": "Non-image bytes named .png",
+    "expected": "Rejected",
+    "actual": "400 Invalid or corrupted image file.",
+    "result": "Pass"
+   },
+   {
+    "no": 7,
+    "test_case": "SEC-4: Oversized upload",
+    "attribute": "11 MB file",
+    "expected": "Rejected (limit 10 MB)",
+    "actual": "400 Image size must be less than 10MB.",
+    "result": "Pass"
+   },
+   {
+    "no": 8,
+    "test_case": "SEC: SQL injection attempt",
+    "attribute": "Admin user search: ' OR '1'='1",
+    "expected": "Treated as text, no users leaked",
+    "actual": "200; 0 users returned",
+    "result": "Pass"
+   },
+   {
+    "no": 9,
+    "test_case": "REL: PDF with unusual user text",
+    "attribute": "Duration: <b>2 weeks</para>",
+    "expected": "PDF still generated",
+    "actual": "200, 7195 bytes",
+    "result": "Pass"
+   }
+  ]
+ }
+}

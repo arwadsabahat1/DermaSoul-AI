@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+
+  --color-teal: #2d6a6a;
+  --color-teal-muted: #3a7a7a;
+  --color-teal-soft: rgb(255 255 255 / 0.22);
+  --color-teal-strong: #245656;
+  --color-teal-deep: #134e4a;
+  --color-navy: #0a1628;
+  /* Warm clinical canvas (reference-inspired) */
+  --color-page: #f5f5f0;
+  --color-slate-text: #1e293b;
+  --color-card: #ffffff;
+  --color-card-border: #e5e8e6;
+
+  /* Align legacy utility names with the teal system */
+  --color-forest-900: #134e4a;
+  --color-forest-800: #0f3d3e;
+  --color-sage-400: #8ebdbd;
+  --color-sage-500: #6a9e9e;
+  --color-sage-600: #3a7a7a;
+  --color-sage-700: #2d6a6a;
+  --color-cream-50: #fafaf7;
+  --color-cream-100: #f5f5f0;
+
+  --shadow-card: 0 2px 4px rgb(45 106 106 / 0.05), 0 14px 36px rgb(15 61 58 / 0.08);
+  --shadow-soft: 0 24px 48px -12px rgb(19 78 74 / 0.18);
+  --shadow-header: 0 4px 24px rgb(0 0 0 / 0.12);
+
+  --animate-float: float 14s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(0.5%, -1%) scale(1.008);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background: var(--color-page);
+  color: var(--color-slate-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgb(45 106 106 / 0.2);
+}
+
+:focus-visible {
+  outline: 3px solid #134e4a;
+  outline-offset: 3px;
+}
+
+:root {
+  --toast-bg: #2d6a6a;
+  --toast-color: #fafafa;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}

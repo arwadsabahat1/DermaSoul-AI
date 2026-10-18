@@ -1,0 +1,9 @@
+.env
+.hf-cache/
+app/ml/hf_models/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.Python
+*.db

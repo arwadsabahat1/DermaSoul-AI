@@ -1,0 +1,30 @@
+{
+  "labels": [
+    "Acne",
+    "Actinic Keratosis",
+    "Benign Tumors",
+    "Bullous",
+    "Candidiasis",
+    "Drug Eruption",
+    "Eczema",
+    "Infestations/Bites",
+    "Lichen",
+    "Lupus",
+    "Moles",
+    "Psoriasis",
+    "Rosacea",
+    "Seborrheic Keratoses",
+    "Skin Cancer",
+    "Sun/Sunlight Damage",
+    "Tinea",
+    "Unknown/Normal",
+    "Vascular Tumors",
+    "Vasculitis",
+    "Vitiligo",
+    "Warts"
+  ],
+  "num_classes": 22,
+  "best_validation_accuracy": 0.7486810551558754,
+  "best_validation_macro_f1": 0.7172370030139399,
+  "held_out_test_accuracy": 0.7710219922380336
+}

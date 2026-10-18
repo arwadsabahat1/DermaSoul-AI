@@ -1,0 +1,45 @@
+# ---------------------------------------------------------------- secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# ---------------------------------------------------------------- private user data (skin photos) and runtime logs
+backend/app/uploads/*
+!backend/app/uploads/.gitkeep
+backend/logs/
+*.log
+
+# ---------------------------------------------------------------- large / downloadable AI models
+backend/app/ml/hf_models/
+backend/.hf-cache/
+backend/app/ml/ml_models/*_old.pth
+
+# ---------------------------------------------------------------- Python
+.venv/
+venv/
+**/.venv/
+**/venv/
+__pycache__/
+*.py[cod]
+.Python
+*.db
+.pytest_cache/
+
+# ---------------------------------------------------------------- frontend build output and dependencies
+node_modules/
+frontend/dist/
+frontend/dist-ssr/
+
+# ---------------------------------------------------------------- generated test artefacts in the backend folder
+backend/test_output.pdf
+backend/test_report_*.pdf
+
+# ---------------------------------------------------------------- OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
