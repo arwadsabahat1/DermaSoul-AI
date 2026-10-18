@@ -9,7 +9,8 @@ BACKEND_ROOT = APP_DIR.parent
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    # Read backend/.env wherever the server is started from (not only from the backend folder).
+    model_config = SettingsConfigDict(env_file=str(BACKEND_ROOT / ".env"), extra="ignore")
 
     APP_NAME: str = "DermaSoul AI"
     APP_VERSION: str = "1.0.0"
@@ -74,5 +75,19 @@ def _configure_huggingface_env() -> None:
         os.environ["HF_HUB_OFFLINE"] = "1"
 
 
+def _resolve_backend_paths() -> None:
+    """Make relative paths from .env (e.g. app/uploads) independent of the current working directory."""
+    for name in ("UPLOAD_DIR", "DIAGNOSIS_MODEL_PATH", "SKIN_TYPE_MODEL_PATH", "HF_CACHE_DIR"):
+        value = getattr(settings, name)
+        if value and not Path(value).is_absolute():
+            setattr(settings, name, str((BACKEND_ROOT / value).resolve()))
+    # Local model folders are resolved too; a Hugging Face repo id (e.g. "d4data/biomedical-ner-all") is kept.
+    for name in ("NLP_ENTITY_MODEL", "RAG_EMBEDDING_MODEL", "RAG_RERANKER_MODEL"):
+        value = getattr(settings, name)
+        if value and not Path(value).is_absolute() and (BACKEND_ROOT / value).exists():
+            setattr(settings, name, str((BACKEND_ROOT / value).resolve()))
+
+
 settings = Settings()
+_resolve_backend_paths()
 _configure_huggingface_env()
